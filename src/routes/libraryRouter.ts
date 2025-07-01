@@ -2,16 +2,16 @@ import express from "express";
 import { createBook, listBooks, welcomeLibrary } from '../controllers/libraryController';
 
 //cria as rotas do blog
-const router = express.Router();
+const libraryRouter = express.Router();
 
 //rota de criação de um novo post/texto
-router.get("/", welcomeLibrary);
+libraryRouter.get("/", welcomeLibrary);
 
 //rota de criação de um novo post/texto
-router.post("/book", createBook);
+libraryRouter.post("/book", createBook);
 
 //rota de listagem de todos os posts/textos
-router.get("/books", listBooks);
+libraryRouter.get("/books", listBooks);
 
 
-export default router;
+export default libraryRouter;
