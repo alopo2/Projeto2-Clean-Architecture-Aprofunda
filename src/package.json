@@ -12,9 +12,12 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/node": "^24.0.9",
     "@types/uuid": "^10.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3",
     "uuid": "^11.1.0"
   }
 }
