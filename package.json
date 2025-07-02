@@ -1,0 +1,33 @@
+{
+  "name": "api-clean-archicture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alopo2/Projeto2-Clean-Architecture-Aprofunda.git"
+  },
+  "keywords": [],
+  "author": "Ângela Carvalho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alopo2/Projeto2-Clean-Architecture-Aprofunda/issues"
+  },
+  "homepage": "https://github.com/alopo2/Projeto2-Clean-Architecture-Aprofunda#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.10",
+    "@types/uuid": "^10.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
