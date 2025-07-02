@@ -15,7 +15,7 @@ export const createBook = async (req: Request, res: Response): Promise<void> => 
 
     res
     .status(201)
-    .json(`Livro ${newBook} criado com sucesso!`);
+    .json(`Livro ${newBook.title} criado com sucesso!`);
 }
 
 export const listBooks = async (_: Request, res: Response): Promise<void> => {
