@@ -11,7 +11,7 @@ class BookStorage {
   
   private static instance: BookStorage;
   
-  private books: Book[] = [];
+  public books: Book[] = [];
 
   private constructor() {}
 
