@@ -31,13 +31,26 @@ Obs: Certifique-se de ter o Node.js e o npm instalados em sua máquina. Além di
 
 ``npm install -g typescript``
 
+## Testes
+
+Para verificar a cobertura de testes, você pode usar o seguinte comando:
+
+``npm run test:coverage``
+
+Para rodar os testes, utilize:
+
+``npm run test``
+
 ## Rotas
 
 Nessa API, temos as seguintes rotas:
 
 - **GET /**: Retorna uma mensagem de boas-vindas.
-- **GET /books**: Retorna todas as tarefas.
-- **POST /book**: Cria uma nova tarefa.
+- **GET /books**: Retorna todos os livros.
+- **POST /book**: Cria um novo livro.
+- **GET /book/:id**: Retorna um livro específico pelo ID.
+- **PATCH /book/:id**: Atualiza um livro específico pelo ID.
+- **DELETE /book/:id**: Deleta um livro específico pelo ID.
 
 ## Exemplo de uso
 
@@ -60,10 +73,28 @@ O resultado será uma mensagem de sucesso indicando que o livro foi criado com s
 
 ![Rota GET retornando o livro criado](image.png)
 
+## Para deletar um livro, você pode enviar uma requisição DELETE para a rota `/book/:id`, onde `:id` é o ID do livro que você deseja deletar
+
+```json
+{
+  "message": "Livro com ID 1 deletado com sucesso!",
+}
+```
+
+## Para atualizar um livro, você pode enviar uma requisição PATCH para a rota `/book/:id` com o seguinte corpo - ou outro corpo que desejar
+
+```json
+{
+  "title": "O Senhor dos Anéis - Edição Atualizada",
+}
+```
+
 ## Próximos passos
 
-- Implementar testes unitários para as rotas.
+- Aumentar a cobertura de testes para 100%.
+- Implementar mais testes unitários.
 - Adicionar validação de entrada para as rotas.
 - Implementar autenticação e autorização
+- Adicionar imagens dos testes com Delete e Patch
 
 Projeto desenvolvido por Ângela Carvalho

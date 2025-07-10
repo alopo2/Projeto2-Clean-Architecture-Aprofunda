@@ -8,8 +8,6 @@ interface BookData {
   author: string;
 }
 
-// Define a estrutura de dados completa de um texto através de herança da interface TextData
-// e inclui os campos adicionais necessários para o armazenamento gerados automaticamente
 interface Book extends BookData {
   id: string;
   created_at: string;
@@ -25,6 +23,40 @@ export default {
  
   listBooks: (): Book[] => {
     return BookStorage.getAll();
+  }, 
+
+  getBookById: (id: string): Book | undefined => {
+    return BookStorage.getBookById(id);
+  },
+
+  updateBook: (id: string, data: Partial<BookData>): Book | null => {
+    const book = BookStorage.getBookById(id);
+
+    if (!book) {
+      return null;
+    }
+
+    if (data.title != null) {
+      book.title = data.title;
+    }
+
+    if (data.content != null) {
+      book.content = data.content;
+    }
+
+    if (data.status != null) {
+      book.status = data.status;
+    }
+
+    if (data.author != null) {
+      book.author = data.author;
+    }
+
+    return book;
+  },
+
+  deleteBookById: (id: string): Book[] => {
+    return BookStorage.deleteBook(id);
   }
 
 };
