@@ -8,6 +8,8 @@ Este projeto é uma API simples de biblioteca, implementada com Clean Architectu
 - Express.js
 - Nodemon
 - Cors
+- Supertest
+- Jest
 
 ## Instalação
 
