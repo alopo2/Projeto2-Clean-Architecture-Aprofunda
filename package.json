@@ -21,8 +21,10 @@
   "homepage": "https://github.com/alopo2/Projeto2-Clean-Architecture-Aprofunda#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "jest": "^30.0.3",
+    "mongoose": "^8.16.4",
     "supertest": "^7.1.1",
     "uuid": "^11.1.0"
   },

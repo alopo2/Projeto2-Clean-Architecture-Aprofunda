@@ -1,9 +1,12 @@
 import express, { Application } from 'express';
 import cors from 'cors'; 
 import libraryRouter from './routes/libraryRouter';
+import connectToMongoDB from './storage/mongoConnect';
 
 const app: Application = express();
 const PORT = 3000;
+
+connectToMongoDB();
 
 app.use(express.json()); 
 app.use(cors());
