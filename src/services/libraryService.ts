@@ -1,12 +1,12 @@
 import { IBookRepository } from "../core/repositories/IBookRepository";
 import { BookData, Book } from "../core/entities/Book";
-import libraryFactory from "../factories/libraryFactory";
+import bookFactory from "../factories/bookFactory";
 
 export class LibraryService {
   constructor(private readonly bookRepository: IBookRepository) {}
 
   async createBook(data: BookData): Promise<Book> {
-    const book = libraryFactory.create(data);
+    const book = bookFactory.create(data);
     await this.bookRepository.createBook(book);
     return book;
   }
