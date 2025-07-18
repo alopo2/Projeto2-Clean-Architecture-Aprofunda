@@ -8,7 +8,6 @@ export class MongoBookRepository implements IBookRepository {
     if (!bookDoc) return null;
 
     return new Book(
-      bookDoc._id.toString(),
       bookDoc.title,
       bookDoc.content,
       bookDoc.author,
@@ -21,7 +20,6 @@ export class MongoBookRepository implements IBookRepository {
     const books = await bookModel.find().exec();
     return books.map(b =>
       new Book(
-        b._id.toString(),
         b.title,
         b.content,
         b.author,
@@ -33,7 +31,6 @@ export class MongoBookRepository implements IBookRepository {
 
   async createBook(book: Book): Promise<void> {
     const doc = new bookModel({
-      _id: book.id,
       title: book.title,
       content: book.content,
       author: book.author,
@@ -51,7 +48,6 @@ export class MongoBookRepository implements IBookRepository {
     if (!updated) return null;
 
     return new Book(
-      updated._id.toString(),
       updated.title,
       updated.content,
       updated.author,

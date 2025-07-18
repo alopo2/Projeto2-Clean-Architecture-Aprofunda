@@ -7,7 +7,6 @@ export interface BookData {
 
 export class Book {
   constructor(
-    public id: string,
     public title: string,
     public content: string,
     public author: string,
