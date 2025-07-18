@@ -1,5 +1,5 @@
 import libraryFactory from "../factories/libraryFactory";
-import BookStorage from "../storage/libraryStorage"; //refatorar depois
+import BookStorage from "../infra/storage/libraryStorage"; //refatorar depois
 
 interface BookData {
   title: string;

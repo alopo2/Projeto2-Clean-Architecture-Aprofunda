@@ -1,6 +1,6 @@
 import { beforeEach } from "node:test";
 import libraryService from "../../services/libraryService";
-import BookStorage from "../../storage/libraryStorage";
+import BookStorage from "../../infra/storage/libraryStorage";
 
 describe('DELETE libraryService', () => {
     beforeEach(() => {
