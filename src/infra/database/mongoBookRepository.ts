@@ -1,26 +1,66 @@
-import { Book } from "../../models/libraryModel";
 import { bookModel } from "./mongooseBookModel";
-import libraryService from "../../services/libraryService";
+import { BookData, Book } from "../../core/entities/Book";
+import { IBookRepository } from "../../core/repositories/IBookRepository";
 
-export class MongoBookRepository {
-    async createBook(book: Book): Promise<Book> {
-        const newBook = new bookModel(book);
-        return await newBook.save();
-    }
+export class MongoBookRepository implements IBookRepository {
+  async getBookById(id: string): Promise<Book | null> {
+    const bookDoc = await bookModel.findById(id).exec();
+    if (!bookDoc) return null;
 
-    async getAllBooks(): Promise<Book[]> {
-        return await bookModel.find().exec();
-    }
+    return new Book(
+      bookDoc._id.toString(),
+      bookDoc.title,
+      bookDoc.content,
+      bookDoc.author,
+      bookDoc.status,
+      bookDoc.created_at // corrigido para camelCase
+    );
+  }
 
-    async getBookById(id: string): Promise<Book | null> {
-        return await bookModel.findById(id).exec();
-    }
+  async listBooks(): Promise<Book[]> {
+    const books = await bookModel.find().exec();
+    return books.map(b =>
+      new Book(
+        b._id.toString(),
+        b.title,
+        b.content,
+        b.author,
+        b.status,
+        b.created_at
+      )
+    );
+  }
 
-    async updateBook(id: string, book: Partial<Book>): Promise<Book | null> {
-        return await bookModel.findByIdAndUpdate(id, book, { new: true }).exec();
-    }
+  async createBook(book: Book): Promise<void> {
+    const doc = new bookModel({
+      _id: book.id,
+      title: book.title,
+      content: book.content,
+      author: book.author,
+      status: book.status,
+      created_at: book.created_at,
+    });
+    await doc.save();
+  }
 
-    async deleteBook(id: string): Promise<void> {
-        await bookModel.findByIdAndDelete(id).exec();
-    }
+  async updateBook(id: string, data: Partial<BookData>): Promise<Book | null> {
+    const updated = await bookModel.findByIdAndUpdate(id, data, {
+      new: true,
+    }).exec();
+
+    if (!updated) return null;
+
+    return new Book(
+      updated._id.toString(),
+      updated.title,
+      updated.content,
+      updated.author,
+      updated.status,
+      updated.created_at
+    );
+  }
+
+  async deleteBookById(id: string): Promise<void> {
+    await bookModel.findByIdAndDelete(id).exec();
+  }
 }

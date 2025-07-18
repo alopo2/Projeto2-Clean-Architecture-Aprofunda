@@ -5,7 +5,7 @@ const bookSchema = new Schema({
     content: {type: String, required: true},
     author: {type: String, required: true},
     status: {type: String, required: true},
-    created_At: {type: Date, default: Date.now},
+    created_at: {type: Date, default: Date.now},
 });
 
 export const bookModel = mongoose.model('Book', bookSchema)
