@@ -10,6 +10,9 @@ Este projeto é uma API simples de biblioteca, implementada com Clean Architectu
 - Cors
 - Supertest
 - Jest
+- MongoDB
+- Mongoose
+- TypeScript
 
 ## Instalação
 
@@ -43,6 +46,41 @@ Para rodar os testes, utilize:
 
 ``npm run test``
 
+## Banco de dados
+
+Para este projeto, utilizamos o MongoDB como banco de dados. Certifique-se de ter o MongoDB instalado e rodando em sua máquina. Você pode usar o MongoDB Atlas para uma solução em nuvem ou instalar localmente.
+
+Instale as dependências do MongoDB e dotenv:
+``npm i mongoose`` e 
+``npm i dotenv``
+
+Certifique-se de criar um arquivo `.env` na raiz do projeto com a seguinte variável:
+
+```
+MONGODB_URI=chave-criada-durante-a-criação-do-banco-no-MongoAtlas
+```
+
+## Estrutura do projeto
+
+A estrutura do projeto segue os princípios da Clean Architecture, separando as responsabilidades em camadas distintas:
+
+```
+src/core/
+  core/entities/
+  core/repositories/
+src/infra/
+  infra/database/
+  infra/server/
+  infra/storage/
+src/controllers/
+src/factories/
+src/routes/
+src/services/
+src/tests/
+  tests/integration/
+  tests/unit/
+```
+
 ## Rotas
 
 Nessa API, temos as seguintes rotas:
@@ -53,6 +91,8 @@ Nessa API, temos as seguintes rotas:
 - **GET /book/:id**: Retorna um livro específico pelo ID.
 - **PATCH /book/:id**: Atualiza um livro específico pelo ID.
 - **DELETE /book/:id**: Deleta um livro específico pelo ID.
+
+*Importante: o id do livro é gerado automaticamente pelo MongoDB, então não é necessário enviá-lo ao criar um livro. Você pode obter o ID do livro após a criação e usá-lo para as operações de leitura, atualização e exclusão.*
 
 ## Exemplo de uso
 
