@@ -6,7 +6,7 @@ export const welcomeUser = async (_: Request, res: Response): Promise<void> => {
 };
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
-  const { name, email, login, password } = req.body;
+  const { name, email, login,password } = req.body;
 
   try {
     const newUser = await userService.create({ name, email, login, password });
