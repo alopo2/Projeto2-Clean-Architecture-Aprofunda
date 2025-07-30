@@ -2,6 +2,14 @@ import { Request, Response, NextFunction } from "express";
 
 import jwt from "jsonwebtoken";
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
+}
+
 const JWT_SECRET = process.env.JWT_SECRET || "default";
 
 export function autenticar(req: Request, res: Response, next: NextFunction) {

@@ -11,8 +11,7 @@ export class MongoUserRepository implements IUserRepository {
       userDoc.name,
       userDoc.login,
       userDoc.email,
-      userDoc.password,
-      userDoc.created_at
+      userDoc.password
     );
   }
 
@@ -23,8 +22,7 @@ export class MongoUserRepository implements IUserRepository {
         u.name,
         u.login,
         u.email,
-        u.password,
-        u.created_at
+        u.password
       )
     );
   }
@@ -34,8 +32,7 @@ export class MongoUserRepository implements IUserRepository {
       name: user.name,
       login: user.login,
       email: user.email,
-      password: user.password,
-      created_at: user.created_at,
+      password: user.password
     });
     await doc.save();
   }
@@ -51,8 +48,19 @@ export class MongoUserRepository implements IUserRepository {
       updated.name,
       updated.login,
       updated.email,
-      updated.password,
-      updated.created_at
+      updated.password
+    );
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const userDoc = await userModel.findOne({ email }).exec();
+    if (!userDoc) return null;
+
+    return new User(
+      userDoc.name,
+      userDoc.login,
+      userDoc.email,
+      userDoc.password
     );
   }
 

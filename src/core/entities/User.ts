@@ -11,6 +11,6 @@ export class User {
         public login: string, 
         public email: string, 
         public password: string,
-        public created_at: Date | string
+        public id?: string,
     ){}
 }
