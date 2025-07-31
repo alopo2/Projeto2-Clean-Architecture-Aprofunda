@@ -10,7 +10,6 @@ export class User {
         public name: string,
         public login: string, 
         public email: string, 
-        public password: string,
-        public id?: string,
+        public password: string
     ){}
 }

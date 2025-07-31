@@ -7,7 +7,6 @@ const userFactory = {
       login,
       email,
       password,
-      new Date()
     );
   },
 };

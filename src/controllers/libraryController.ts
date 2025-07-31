@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import libraryService from '../factories/libraryFactory'; // importa a instância já configurada
+import libraryService from '../factories/libraryFactory'; 
 
 export const welcomeLibrary = async (_: Request, res: Response): Promise<void> => {
   res.status(200).json('Bem-vindo à API de Biblioteca!');
