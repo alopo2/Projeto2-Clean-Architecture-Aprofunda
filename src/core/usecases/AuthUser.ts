@@ -22,7 +22,7 @@ export class AuthUser{
             throw new Error("credenciais inválidas")
         }
 
-        const token = gerarToken({userId: user.id, email: user.email});
+        const token = gerarToken({email: user.email});
 
         return token
 

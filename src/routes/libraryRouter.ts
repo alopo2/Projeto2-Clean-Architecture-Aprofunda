@@ -1,4 +1,5 @@
 import express from "express";
+import { autenticar } from '../shared/middlewares/authMiddlewares';
 import { createBook, listBooks, welcomeLibrary, getBookById, deleteBook, updateBook } from '../controllers/libraryController';
 
 
