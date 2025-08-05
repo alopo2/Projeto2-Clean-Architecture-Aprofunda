@@ -1,31 +1,30 @@
-import libraryService from "../../services/libraryService";
-import BookStorage from "../../infra/storage/libraryStorage";
+import { LibraryService } from "../../services/libraryService";
+import { FakeBookRepository } from "../mocks/FakeBookRepository";
 
 describe('POST libraryService', () => {
+    let libraryService: LibraryService;
+
     beforeEach(() => {
-
-        BookStorage.books = []
-
+        const fakeRepo = new FakeBookRepository();
+        libraryService = new LibraryService(fakeRepo);
     });
 
-    it('deverá criar um livro e retornar seu status', () => {
-        const book = libraryService.createBook({
+    it('deverá criar um livro e retornar seu status', async () => {
+        const book = await libraryService.createBook({
             title: 'Orgulho e Preconceito',
             content: 'livro de romance',
             status: 'disponível',
             author: 'Jane Austen'
         });
 
-        expect(BookStorage.books).toHaveLength(1)
-        expect(book.status).toBe('disponível')
-        expect(book.id).toBeTruthy()
-        expect(book).toEqual(expect.objectContaining({ 
-            id: expect.any(String),
+        expect(book).toBeDefined();
+        expect(book.status).toBe('disponível');
+        expect(book.id).toBeTruthy();
+        expect(book).toEqual(expect.objectContaining({
             title: 'Orgulho e Preconceito',
             content: 'livro de romance',
             status: 'disponível',
-            author: 'Jane Austen', 
-            created_at: expect.any(String)
+            author: 'Jane Austen'
         }));
     });
 

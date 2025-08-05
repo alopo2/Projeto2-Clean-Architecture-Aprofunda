@@ -1,14 +1,17 @@
-import { beforeEach } from "node:test";
-import libraryService from "../../services/libraryService";
-import BookStorage from "../../infra/storage/libraryStorage";
+import { LibraryService } from "../../services/libraryService";
+import { FakeBookRepository } from "../mocks/FakeBookRepository";
+
 
 describe('DELETE libraryService', () => {
+    let libraryService: LibraryService;
+
     beforeEach(() => {
-        BookStorage.books = [];
+        const fakeRepo = new FakeBookRepository();
+        libraryService = new LibraryService(fakeRepo);
     })
 
-    it('deverá deletar um livro pelo ID', () => {
-        const book = libraryService.createBook({
+    it('deverá deletar um livro pelo ID', async () => {
+        const book = await libraryService.createBook({
             title: 'Razão e Sensibilidade',
             content: 'livro de romance',
             status: 'available',
@@ -16,7 +19,7 @@ describe('DELETE libraryService', () => {
         });
 
         const deletedBook = libraryService.deleteBookById(book.id);
-        expect(BookStorage.books).toHaveLength(0);
-        expect(BookStorage.books).not.toContain(book);
+        expect(deletedBook).resolves.toBeUndefined();
+        await expect(libraryService.getBookById(book.id)).resolves.toBeNull();
     });
 })
