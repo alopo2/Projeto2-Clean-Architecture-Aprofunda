@@ -11,7 +11,8 @@ export class MongoUserRepository implements IUserRepository {
       userDoc.name,
       userDoc.login,
       userDoc.email,
-      userDoc.password
+      userDoc.password,
+      userDoc._id.toString(),
     );
   }
 
@@ -22,7 +23,8 @@ export class MongoUserRepository implements IUserRepository {
         u.name,
         u.login,
         u.email,
-        u.password
+        u.password,
+        u._id.toString(),
       )
     );
   }
@@ -48,7 +50,8 @@ export class MongoUserRepository implements IUserRepository {
       updated.name,
       updated.login,
       updated.email,
-      updated.password
+      updated.password, 
+      updated._id.toString()
     );
   }
 
@@ -60,7 +63,8 @@ export class MongoUserRepository implements IUserRepository {
       userDoc.name,
       userDoc.login,
       userDoc.email,
-      userDoc.password
+      userDoc.password, 
+      userDoc._id.toString()
     );
   }
 

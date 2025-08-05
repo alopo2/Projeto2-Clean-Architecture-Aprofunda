@@ -55,3 +55,30 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     res.status(401).json({ message: error.message });
   }
 };
+
+export const getMe = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // O ID do usuário foi injetado pelo middleware JWT no req.user
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ message: "Token inválido ou ausente" });
+      return;
+    }
+
+    const user = await userService.getUserById(userId);
+
+    if (!user) {
+      res.status(404).json({ message: "Usuário não encontrado" });
+      return;
+    }
+
+    res.status(200).json({
+      name: user.name,
+      email: user.email,
+      login: user.login,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao buscar dados do usuário", error });
+  }
+};
