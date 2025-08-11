@@ -5,11 +5,11 @@ import connectToMongoDB from "../../infra/database/mongoConnect";
 
 describe("GET /", () => {
   beforeAll(async () => {
-    await connectToMongoDB(); // conecta antes de iniciar os testes
+    await connectToMongoDB();
   });
 
   afterAll(async () => {
-    await mongoose.connection.close(); // fecha após os testes
+    await mongoose.connection.close();
   });
 
   it("deverá retornar uma mensagem de boas vindas", async () => {
