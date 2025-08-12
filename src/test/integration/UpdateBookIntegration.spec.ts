@@ -1,18 +1,27 @@
 import request from "supertest";
 import app from "../..";
+import mongoose from "mongoose";
+import connectToMongoDB from "../../infra/database/mongoConnect";
 
 describe('PATCH /book/:id', () => {
     let bookId: string;
-    
+
     beforeAll(async () => {
-        const { body } = await request(app).post('/book').send({
-        title: 'Orgulho e Preconceito',
-        content: 'livro de romance',
-        status: 'disponível',
-        author: 'Jane Austen',
+        await connectToMongoDB(); 
+
+        // Cria um livro para atualizar nos testes
+        const createResponse = await request(app)
+            .post('/book')
+            .send({
+                title: 'Orgulho e Preconceito',
+                author: 'Jane Austen'
+            });
+        bookId = createResponse.body.id || createResponse.body._id;
     });
-    bookId = body.id;
-});
+
+    afterAll(async () => {
+        await mongoose.connection.close(); // fecha após os testes
+    });
 
     it('deve retornar 200 quando atualizar um livro com sucesso', async () => {
         const response = await request(app)
@@ -22,7 +31,8 @@ describe('PATCH /book/:id', () => {
             });
 
         expect(response.status).toBe(200);
-        expect(response.body).toEqual(`Livro com ID ${bookId} atualizado com sucesso!`);
+        expect(response.body.title).toBe(`Orgulho e Preconceito - Edição Atualizada`);
+        expect(response.body.id || response.body._id).toBe(bookId);
     });
 
     it('deve retornar 404 quando tentar atualizar um livro inexistente', async () => {
