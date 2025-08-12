@@ -1,15 +1,10 @@
 import request from "supertest";
-import app from "../..";
-import mongoose from "mongoose";
-import connectToMongoDB from "../../infra/database/mongoConnect";
+import app from '../../app';
 
 describe('PATCH /book/:id', () => {
     let bookId: string;
 
     beforeAll(async () => {
-        await connectToMongoDB(); 
-
-        // Cria um livro para atualizar nos testes
         const createResponse = await request(app)
             .post('/book')
             .send({
@@ -17,10 +12,6 @@ describe('PATCH /book/:id', () => {
                 author: 'Jane Austen'
             });
         bookId = createResponse.body.id || createResponse.body._id;
-    });
-
-    afterAll(async () => {
-        await mongoose.connection.close(); // fecha após os testes
     });
 
     it('deve retornar 200 quando atualizar um livro com sucesso', async () => {

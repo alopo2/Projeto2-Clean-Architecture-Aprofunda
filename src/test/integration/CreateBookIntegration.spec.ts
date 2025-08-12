@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../..";
+import app from '../../app'
 
 describe("POST /book", () => {
   it("deverá criar um novo livro", async () => {

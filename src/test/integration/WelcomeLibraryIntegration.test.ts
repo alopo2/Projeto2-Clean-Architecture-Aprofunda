@@ -1,16 +1,7 @@
 import request from "supertest";
-import app from "../..";
-import mongoose from "mongoose";
-import connectToMongoDB from "../../infra/database/mongoConnect";
+import app from "../../app";
 
 describe("GET /", () => {
-  beforeAll(async () => {
-    await connectToMongoDB();
-  });
-
-  afterAll(async () => {
-    await mongoose.connection.close();
-  });
 
   it("deverá retornar uma mensagem de boas vindas", async () => {
     const response = await request(app).get("/");

@@ -12,7 +12,7 @@ export class MongoBookRepository implements IBookRepository {
       bookDoc.content,
       bookDoc.author,
       bookDoc.status,
-      bookDoc.created_at // corrigido para camelCase
+      bookDoc.created_at 
     );
   }
 

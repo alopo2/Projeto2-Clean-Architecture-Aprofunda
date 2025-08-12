@@ -1,21 +1,22 @@
-import express, { Application } from 'express';
-import cors from 'cors'; 
-import libraryRouter from '../../routes/libraryRouter';
+import app from '../../app';
 import connectToMongoDB from '../database/mongoConnect';
-import userRouter from '../../routes/userRouter';
-import { config } from '../../config/environment';
 
-const app: Application = express();
+const PORT = process.env.PORT || 3000;
 
-app.use(express.json()); 
-app.use(cors());
+async function start() {
+  await connectToMongoDB();
+  const server = app.listen(PORT, () =>
+    console.log(`Server is running on http://localhost:${PORT}`)
+  );
 
-const PORT = config.port
+  return server;
+}
 
-connectToMongoDB();
+if (process.env.NODE_ENV !== "test") {
+  start().catch((err) => {
+    console.error("Failed to start server:", err);
+    process.exit(1);
+  });
+}
 
-app.use(libraryRouter);
-app.use(userRouter);
-
-export default app;
-export { PORT };
+export { start };

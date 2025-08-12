@@ -1,6 +1,5 @@
 import request from "supertest";
-
-import app from "../..";
+import app from '../../app'
 
 describe("DELETE /book/:id", () => {
   let bookId: string;
