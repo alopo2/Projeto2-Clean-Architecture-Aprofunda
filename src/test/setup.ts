@@ -1,16 +1,26 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+import { MongoMemoryServer } from "mongodb-memory-server";
+
+let mongoServer: MongoMemoryServer;
 
 beforeAll(async () => {
-  jest.setTimeout(20000);
- 
-  const uri = process.env.MONGODB_URI!;
-  if (!uri) throw new Error("MONGODB_URI não definida para testes");
-  await mongoose.connect(uri, { });
+  // cria um servidor Mongo em memória
+  mongoServer = await MongoMemoryServer.create();
+  const uri = mongoServer.getUri();
+
+  await mongoose.connect(uri);
 });
 
 afterAll(async () => {
-  await mongoose.connection.dropDatabase(); 
+  await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
+  await mongoServer.stop();
+});
+
+afterEach(async () => {
+  // limpa todas as coleções após cada teste
+  const collections = mongoose.connection.collections;
+  for (const key in collections) {
+    await collections[key].deleteMany({});
+  }
 });

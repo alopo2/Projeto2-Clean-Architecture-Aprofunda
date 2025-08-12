@@ -36,6 +36,7 @@ export const getBookById = async (req: Request, res: Response): Promise<void> =>
     }
     res.status(200).json(book);
   } catch (error) {
+    console.error(error)
     res.status(500).json({ message: 'Erro ao buscar livro', error });
   }
 };
@@ -45,7 +46,7 @@ export const deleteBook = async (req: Request, res: Response): Promise<void> => 
 
   try {
     await libraryService.deleteBookById(id);
-    res.status(200).json(`Livro com ID ${id} deletado com sucesso!`);
+    res.status(200).json({ message: `Livro com ID ${id} deletado com sucesso!` });
   } catch (error) {
     res.status(500).json({ message: 'Erro ao deletar livro', error });
   }
