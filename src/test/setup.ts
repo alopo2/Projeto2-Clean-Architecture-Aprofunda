@@ -4,7 +4,6 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 let mongoServer: MongoMemoryServer;
 
 beforeAll(async () => {
-  // cria um servidor Mongo em memória
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
 
@@ -18,7 +17,6 @@ afterAll(async () => {
 });
 
 afterEach(async () => {
-  // limpa todas as coleções após cada teste
   const collections = mongoose.connection.collections;
   for (const key in collections) {
     await collections[key].deleteMany({});

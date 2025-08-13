@@ -39,11 +39,11 @@
     "mongoose": "^8.16.4",
     "supertest": "^7.1.1",
     "uuid": "^11.1.0",
-    "@types/bcrypt": "^6.0.0"
+    "@types/bcrypt": "^6.0.0",
+    "mongodb-memory-server": "^10.2.0"
   },
   "devDependencies": {
     "cross-env": "^10.0.0",
-    "mongodb-memory-server": "^10.2.0",
     "ts-jest": "^29.4.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
