@@ -38,10 +38,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.4",
     "supertest": "^7.1.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "@types/bcrypt": "^6.0.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^6.0.0",
     "cross-env": "^10.0.0",
     "mongodb-memory-server": "^10.2.0",
     "ts-jest": "^29.4.0",
